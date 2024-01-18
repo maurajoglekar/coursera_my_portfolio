@@ -15,7 +15,18 @@ const LandingSection = () => (
     isDarkBackground
     backgroundColor="#2A4365"
   >
-
+    <VStack w="1024px" p={32} alignItems="center">
+      <Avatar name="Maura Joglekar" src="https://i.pravatar.cc/150?img=7" />
+      <Heading as="h4" size="sm">
+        {greeting}
+      </Heading>
+      <Heading as="h3" size="lg">
+        {bio1}
+      </Heading>
+      <Heading as="h3" size="lg">
+        {bio2}
+      </Heading>
+    </VStack>
   </FullScreenSection>
 );
 
