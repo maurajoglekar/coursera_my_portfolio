@@ -53,34 +53,42 @@ const ContactMeSection = () => {
         <Box p={6} rounded="md" w="100%">
           <form onSubmit={formik.handleSubmit}>
             <VStack spacing={4}>
-              <FormControl isInvalid={false}>
+              <FormControl
+                isInvalid={
+                  formik.touched.firstName && formik.values.firstName.length < 1
+                }
+              >
                 <FormLabel htmlFor="firstName">Name</FormLabel>
                 <Input
                   id="firstName"
                   name="firstName"
+                  {...formik.getFieldProps("firstName")}
                   onChange={formik.handleChange}
-                  value={formik.values.firstName}
                 />
-                <FormErrorMessage></FormErrorMessage>
+                <FormErrorMessage>Required</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={false}>
+              <FormControl
+                isInvalid={
+                  formik.touched.email && formik.values.email.length < 1
+                }
+              >
                 <FormLabel htmlFor="email">Email Address</FormLabel>
                 <Input
                   id="email"
                   name="email"
                   type="email"
+                  {...formik.getFieldProps("email")}
                   onChange={formik.handleChange}
-                  value={formik.values.email}
                 />
-                <FormErrorMessage></FormErrorMessage>
+                <FormErrorMessage>Required</FormErrorMessage>
               </FormControl>
               <FormControl>
                 <FormLabel htmlFor="type">Type of enquiry</FormLabel>
                 <Select
                   id="type"
                   name="type"
+                  {...formik.getFieldProps("type")}
                   onChange={formik.handleChange}
-                  value={formik.values.type}
                 >
                   <option value="hireMe">Freelance project proposal</option>
                   <option value="openSource">
@@ -89,16 +97,22 @@ const ContactMeSection = () => {
                   <option value="other">Other</option>
                 </Select>
               </FormControl>
-              <FormControl isInvalid={false}>
+              <FormControl
+                isInvalid={
+                  formik.touched.comment && formik.values.comment.length < 25
+                }
+              >
                 <FormLabel htmlFor="comment">Your message</FormLabel>
                 <Textarea
                   id="comment"
                   name="comment"
                   height={250}
+                  {...formik.getFieldProps("comment")}
                   onChange={formik.handleChange}
-                  value={formik.values.comment}
                 />
-                <FormErrorMessage></FormErrorMessage>
+                <FormErrorMessage>
+                  Must be at least 25 characters
+                </FormErrorMessage>
               </FormControl>
               <Button type="submit" colorScheme="purple" width="full">
                 Submit
