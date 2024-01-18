@@ -12,7 +12,7 @@ import {
   Textarea,
   VStack,
 } from "@chakra-ui/react";
-import * as Yup from "yup";
+import * as yup from "yup";
 import FullScreenSection from "./FullScreenSection";
 import useSubmit from "../hooks/useSubmit";
 import { useAlertContext } from "../context/alertContext";
@@ -32,9 +32,10 @@ const ContactMeSection = () => {
     onSubmit: (values) => {
       submit("", values); // ?? Need the URL for the submit
     },
-    validationSchema: Yup.object({
-      firstName: Yup.string().required("Required"),
-      comment: Yup.string().min(25, "Must be at least 25 characters"),
+    validationSchema: yup.object().shape({
+      firstName: yup.string().required("Required"),
+      email: yup.string().required("Required"),
+      comment: yup.string().min(25, "Must be at least 25 characters"),
     }),
   });
 
