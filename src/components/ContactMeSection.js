@@ -7,8 +7,10 @@ import {
   FormErrorMessage,
   FormLabel,
   Heading,
+  HStack,
   Input,
   Select,
+  Spinner,
   Textarea,
   VStack,
 } from "@chakra-ui/react";
@@ -20,23 +22,19 @@ import { useAlertContext } from "../context/alertContext";
 const ContactMeSection = () => {
   const { isLoading, response, submit } = useSubmit();
   const { onOpen } = useAlertContext();
-  const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
   const formik = useFormik({
     initialValues: {
       firstName: "",
       email: "",
-      type: undefined, // 'hireMe' | 'openSource' | 'other'
+      type: "hireMe", // 'hireMe' | 'openSource' | 'other'
       comment: "",
     },
-    onSubmit: (values) => {
-      submit("", values); // ?? Need the URL for the submit
+    onSubmit: async (values) => {
+      await submit("", values);
+      onOpen(response.type, response.message);
     },
-    validationSchema: yup.object().shape({
-      firstName: yup.string().required("Required"),
-      email: yup.string().required("Required"),
-      comment: yup.string().min(25, "Must be at least 25 characters"),
-    }),
+    validationSchema: yup.object({}),
   });
 
   return (
@@ -50,8 +48,19 @@ const ContactMeSection = () => {
         <Heading as="h1" id="contactme-section">
           Contact me
         </Heading>
+        {isLoading && (
+          <HStack>
+            <Spinner />
+            <p>Loading ...</p>
+          </HStack>
+        )}
         <Box p={6} rounded="md" w="100%">
-          <form onSubmit={formik.handleSubmit}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              formik.handleSubmit();
+            }}
+          >
             <VStack spacing={4}>
               <FormControl
                 isInvalid={
