@@ -16,7 +16,7 @@ const LandingSection = () => (
     backgroundColor="#2A4365"
   >
     <VStack w="1024px" p={32} alignItems="center">
-      <Avatar name="Maura Joglekar" src="https://i.pravatar.cc/150?img=7" />
+      <Avatar name="avatar-pic" src="https://i.pravatar.cc/150?img=7" />
       <Heading as="h4" size="sm">
         {greeting}
       </Heading>
