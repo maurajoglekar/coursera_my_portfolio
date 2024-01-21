@@ -48,12 +48,6 @@ const ContactMeSection = () => {
         <Heading as="h1" id="contactme-section">
           Contact me
         </Heading>
-        {isLoading && (
-          <HStack>
-            <Spinner />
-            <p>Loading ...</p>
-          </HStack>
-        )}
         <Box p={6} rounded="md" w="100%">
           <form
             onSubmit={(e) => {
@@ -123,7 +117,7 @@ const ContactMeSection = () => {
                   Must be at least 25 characters
                 </FormErrorMessage>
               </FormControl>
-              <Button type="submit" colorScheme="purple" width="full">
+              <Button type="submit" colorScheme="purple" width="full" isLoading={isLoading}>
                 Submit
               </Button>
             </VStack>
